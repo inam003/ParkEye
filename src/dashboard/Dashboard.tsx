@@ -1,7 +1,6 @@
 import { Outlet } from "react-router";
 import Sidebar from "../components/Sidebar";
 import { Moon } from "lucide-react";
-import UserAvatar from "/avatar 1.jpeg";
 
 const Dashboard = () => {
   return (
