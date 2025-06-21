@@ -69,7 +69,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
 
   return (
     <div
-      className={`hidden md:flex flex-col justify-between ${
+      className={`hidden md:flex flex-shrink-0 flex-col justify-between ${
         sidebarOpen ? "md:w-64" : "md:w-20"
       } transition-all duration-300 left-0 min-h-[91.1vh] max-h-full overflow-hidden bg-white border-r border-slate-200 py-4`}
     >

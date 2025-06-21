@@ -1,4 +1,4 @@
-import { DollarSign, Route, SunIcon } from "lucide-react";
+import { Car, DollarSign, Hammer, Moon, Route, SunIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getDashboardData } from "../../api/API";
 
@@ -11,14 +11,18 @@ type DashboardData = {
 
 const GetDashboardDataCards = () => {
   const [dashboardData, setDashboardData] = useState<DashboardData>();
+  const hour = new Date().getHours();
+  const isEvening = hour >= 18;
+  const dayIcon = isEvening ? <Moon size={25} /> : <SunIcon size={25} />;
+  const dayTitle = isEvening ? "Evening" : "Day Time";
   const cards = [
     {
-      icon: <SunIcon size={25} />,
-      value: `${new Date().getHours()}:${new Date().getMinutes()} PM`,
-      title: "Day Time",
+      icon: dayIcon,
+      value: `${hour}:${new Date().getMinutes()} ${isEvening ? "PM" : "AM"}`,
+      title: dayTitle,
     },
     {
-      icon: <Route size={25} />,
+      icon: <Car size={25} />,
       value: dashboardData?.totalTrips,
       defaultValue: "25",
       title: "Trips",
@@ -30,13 +34,13 @@ const GetDashboardDataCards = () => {
       title: "Transactions",
     },
     {
-      icon: <DollarSign size={25} />,
+      icon: <Hammer size={25} />,
       value: dashboardData?.totalFines,
       defaultValue: "75",
       title: "Fines",
     },
     {
-      icon: <DollarSign size={25} />,
+      icon: <Route size={25} />,
       value: dashboardData?.finePerKm,
       defaultValue: "100",
       title: "Fine/KM",
