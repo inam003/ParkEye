@@ -12,12 +12,13 @@ import {
 import { NavLink } from "react-router";
 import DashboardLogo from "/ParkeyeLogoDashboard.svg";
 import { useState } from "react";
+import UserImage from "/Avatar.png";
 
 type SidebarProps = {
   className?: string;
 };
 
-const menus = [
+const mainMenus = [
   {
     path: "/dashboard",
     icon: <Home className="size-4" />,
@@ -53,6 +54,9 @@ const menus = [
     icon: <CircleHelp className="size-4" />,
     title: "Integrations",
   },
+];
+
+const secondaryMenu = [
   {
     path: "settings",
     icon: <Settings className="size-4" />,
@@ -65,7 +69,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
 
   return (
     <div
-      className={`hidden md:flex flex-col ${
+      className={`hidden md:flex flex-col justify-between ${
         sidebarOpen ? "md:w-64" : "md:w-20"
       } transition-all duration-300 left-0 min-h-[91.1vh] max-h-full overflow-hidden bg-white border-r border-slate-200 py-4`}
     >
@@ -103,32 +107,76 @@ const Sidebar: React.FC<SidebarProps> = () => {
         </div>
       )}
 
-      <nav
-        className={`items-start ${
-          sidebarOpen ? "px-2 lg:px-3" : "px-1"
-        } text-sm font-medium h-full flex-1`}
-      >
-        {menus.map((item, id) => (
-          <div key={id}>
-            <NavLink
-              end={item.path === "/dashboard"}
-              to={item.path}
-              className={({ isActive }) =>
-                `flex items-center gap-3 rounded-lg py-2 my-1 text-muted-foreground transition-all duration-200 ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-0 ${
-                  isActive
-                    ? "bg-[#f7f0ff] text-[#7f56d9]"
-                    : "hover:bg-gray-200 hover:text-black"
-                } ${sidebarOpen ? "px-3" : "justify-center px-2"}`
-              }
-            >
-              <span className="size-4">{item.icon}</span>
-              {sidebarOpen && (
-                <span className="whitespace-nowrap">{item.title}</span>
-              )}
-            </NavLink>
+      <div className="flex flex-col flex-1 justify-between h-full">
+        <div
+          className={`items-start ${
+            sidebarOpen ? "px-2 lg:px-3" : "px-1"
+          } text-sm font-medium`}
+        >
+          {mainMenus.map((menu, id) => (
+            <div key={id}>
+              <NavLink
+                end={menu.path === "/dashboard"}
+                to={menu.path}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-lg py-2 my-1 text-muted-foreground transition-all duration-200 ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-0 ${
+                    isActive
+                      ? "bg-[#f7f0ff] text-[#7f56d9]"
+                      : "hover:bg-gray-200 hover:text-black"
+                  } ${sidebarOpen ? "px-3" : "justify-center px-2"}`
+                }
+              >
+                <span className="size-4">{menu.icon}</span>
+                {sidebarOpen && (
+                  <span className="whitespace-nowrap">{menu.title}</span>
+                )}
+              </NavLink>
+            </div>
+          ))}
+        </div>
+        <div
+          className={`flex flex-col items-start gap-2 w-full ${
+            sidebarOpen ? "px-2 lg:px-3" : "px-1"
+          } text-sm font-medium mb-2`}
+        >
+          {secondaryMenu.map((menu, id) => (
+            <div key={id} className="w-full">
+              <NavLink
+                end={menu.path === "/dashboard"}
+                to={menu.path}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-lg py-2 my-1 text-muted-foreground transition-all duration-200 ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-0 ${
+                    isActive
+                      ? "bg-[#f7f0ff] text-[#7f56d9]"
+                      : "hover:bg-gray-200 hover:text-black"
+                  } ${sidebarOpen ? "px-3" : "justify-center px-2"}`
+                }
+              >
+                <span className="size-4">{menu.icon}</span>
+                {sidebarOpen && (
+                  <span className="whitespace-nowrap">{menu.title}</span>
+                )}
+              </NavLink>
+            </div>
+          ))}
+
+          <div
+            className={` ${
+              sidebarOpen
+                ? "flex items-center justify-start gap-2 rounded-xl border border-gray-300 p-2 w-full"
+                : "mx-auto"
+            }`}
+          >
+            <img src={UserImage} alt="UserImage" />
+            {sidebarOpen && (
+              <div className="flex flex-col items-start text-base leading-5">
+                <span className="font-semibold">James Rhye</span>
+                <span className="text-sm text-gray-500">james@parkeye.com</span>
+              </div>
+            )}
           </div>
-        ))}
-      </nav>
+        </div>
+      </div>
     </div>
   );
 };

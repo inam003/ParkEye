@@ -20,21 +20,25 @@ const GetDashboardDataCards = () => {
     {
       icon: <Route size={25} />,
       value: dashboardData?.totalTrips,
+      defaultValue: "25",
       title: "Trips",
     },
     {
       icon: <DollarSign size={25} />,
       value: dashboardData?.totalTransaction,
+      defaultValue: "50",
       title: "Transactions",
     },
     {
       icon: <DollarSign size={25} />,
       value: dashboardData?.totalFines,
+      defaultValue: "75",
       title: "Fines",
     },
     {
       icon: <DollarSign size={25} />,
       value: dashboardData?.finePerKm,
+      defaultValue: "100",
       title: "Fine/KM",
     },
   ];
@@ -61,7 +65,9 @@ const GetDashboardDataCards = () => {
             className="flex flex-col gap-3 bg-white rounded-[27px] p-5 border border-gray-300 w-44 min-h-44 justify-between items-start"
           >
             <div className="text-zinc-500">{card.icon}</div>
-            <div className="text-2xl font-semibold">{card.value}</div>
+            <div className="text-2xl font-semibold">
+              {card.value || card.defaultValue}
+            </div>
             <div className="text-sm text-[#676767]">{card.title}</div>
           </div>
         );
